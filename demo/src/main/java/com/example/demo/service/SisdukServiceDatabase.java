@@ -34,9 +34,9 @@ public class SisdukServiceDatabase implements SisdukService {
 	}
 
 	@Override
-	public Keluarga selectKeluarga(int nomor_kk) {
-		log.info("select keluarga with nomor kk {}", nomor_kk);
-		return sisdukMapper.selectKeluarga(nomor_kk);
+	public Keluarga selectKeluarga(int id_keluarga) {
+		log.info("select keluarga with nomor kk {}", id_keluarga);
+		return sisdukMapper.selectKeluarga(id_keluarga);
 	}
 
 	@Override

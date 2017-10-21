@@ -24,7 +24,7 @@
 		<div class="container">
 			<h1>Lihat Data Penduduk</h1>
         	<br></br>
-        	<table id="tabel-penduduk" class="display" cellspacing="0" width="50%">
+        	<table id="tabel-penduduk" class="display" cellspacing="0" width="80%">
         	<thead>
         		<tr>
         			<th></th>
@@ -42,10 +42,27 @@
         		</tr>
          		<tr>
         			<td><strong>Tempat/Tanggal Lahir</strong></td>
-        			<td th:text="${penduduk.tempat_lahir} + '/' + ${penduduk.tanggal_lahir}"  ></td>
+        			<td th:text="${penduduk.tempat_lahir} + ', ' + ${penduduk.tanggal_lahir}"  ></td>
         		</tr>
           		<tr>
         			<td><strong>Alamat</strong></td>
+        			<td th:text="${keluarga.alamat}"></td>
+        		</tr>
+          		<tr>
+        			<td><strong>RT/RW</strong></td>
+        			<td th:text="${keluarga.rt} + '/' + ${keluarga.rw}"></td>
+        		</tr>
+          		<tr>
+        			<td><strong>Kelurahan/Desa</strong></td>
+        			<td th:text="${kelurahan.nama_kelurahan}"></td>
+        		</tr>
+          		<tr>
+        			<td><strong>Kecamatan</strong></td>
+        			<td th:text="${kecamatan.nama_kecamatan}"></td>
+        		</tr>        		
+          		<tr>
+        			<td><strong>Kota</strong></td>
+        			<td th:text="${kota.nama_kota}"></td>
         		</tr>
         		<tr>
         			<td><strong>Golongan Darah</strong></td>

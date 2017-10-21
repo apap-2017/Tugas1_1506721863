@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Keluarga {
-	private int id_keluarga;
+	private int id;
 	private char nomor_kk;
 	private String alamat;
-	private char rt;
-	private char rw;
+	private String rt;
+	private String rw;
 	private int id_kelurahan;
 	private int is_tidak_berlaku;
 }

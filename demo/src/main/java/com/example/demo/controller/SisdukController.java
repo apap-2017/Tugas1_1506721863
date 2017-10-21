@@ -31,21 +31,23 @@ public class SisdukController {
     public String viewPath (Model model, @RequestParam(value = "nik", required = true) String nik)
     {
         Penduduk penduduk = sisdukDAO.selectPenduduk(nik);
-        log.info ("select penduduk with nik {}", nik);
         if (penduduk != null) {
-        	log.info ("nik {}", penduduk.getNik());
-            //Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
-            //Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());
-            /*Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
+            Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
+            Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());
+            Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
             Kota kota = sisdukDAO.selectKota(kecamatan.getId_kota());
             model.addAttribute("alamat", keluarga.getAlamat());
         	model.addAttribute("rt", keluarga.getRt());
         	model.addAttribute("rw", keluarga.getRw());
         	model.addAttribute("kelurahan", kelurahan.getNama_kelurahan());
         	model.addAttribute("kecamatan", kecamatan.getNama_kecamatan());
-        	model.addAttribute("kota", kota.getNama_kota());*/
-        	model.addAttribute ("penduduk", penduduk);
-            return "penduduk";
+        	model.addAttribute("kota", kota.getNama_kota());
+        	model.addAttribute("penduduk", penduduk);
+            model.addAttribute("keluarga", keluarga);
+        	model.addAttribute("kelurahan", kelurahan);
+        	model.addAttribute("kecamatan", kecamatan);
+        	model.addAttribute("kota", kota);
+        	return "penduduk";
         } else {
             model.addAttribute ("nik", nik);
             return "/error/404";

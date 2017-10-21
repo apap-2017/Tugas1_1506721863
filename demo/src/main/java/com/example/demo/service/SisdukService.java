@@ -10,7 +10,7 @@ public interface SisdukService
 {
 	Penduduk selectPenduduk(String nik);
 	Penduduk selectPendudukKota(String nik);
-	Keluarga selectKeluarga(int nomor_kk);
+	Keluarga selectKeluarga(int id_keluarga);
 	void addPendudukKeluarga();
 	void addKeluarga(Keluarga keluarga);
 	void updatePenduduk(String nik);
