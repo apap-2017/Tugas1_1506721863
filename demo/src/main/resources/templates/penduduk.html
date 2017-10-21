@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Halaman Utama Sisduk DKI</title>
+		<meta charset="ISO-8859-1"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">Sistem Informasi Kependudukan</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+      				<li><a href="/">Home</a></li>
+      				<li class="active"><a href="">Cari Data</a></li>
+      			</ul>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<h1>Lihat Data Penduduk</h1>
+        	<br></br>
+        	<table id="tabel-penduduk" class="display" cellspacing="0" width="50%">
+        	<thead>
+        		<tr>
+        			<th></th>
+        			<th></th>
+        		</tr>
+        	</thead>
+        	<tfoot>
+        		<tr>
+        			<td><strong>NIK</strong></td>
+        			<td th:text="${penduduk.nik}"></td>
+        		</tr>
+           		<tr>
+        			<td><strong>Nama</strong></td>
+        			<td th:text="${penduduk.nama}"></td>
+        		</tr>
+         		<tr>
+        			<td><strong>Tempat/Tanggal Lahir</strong></td>
+        			<td th:text="${penduduk.tempat_lahir} + '/' + ${penduduk.tanggal_lahir}"  ></td>
+        		</tr>
+          		<tr>
+        			<td><strong>Alamat</strong></td>
+        			<td th:text="${penduduk.nik}"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Golongan Darah</strong></td>
+        			<td th:text="${penduduk.golongan_darah}"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Agama</strong></td>
+        			<td th:text="${penduduk.agama}"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Status Perkawinan</strong></td>
+        			<td th:text="${penduduk.status_perkawinan}"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Pekerjaan</strong></td>
+        			<td th:text="${penduduk.pekerjaan}"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Kewarganegaraan</strong></td>
+        			<td th:text="${is_wni}? 'WNA' : 'WNI'"></td>
+        		</tr>
+        		<tr>
+        			<td><strong>Status Kematian</strong></td>
+        			<td th:text="${is_wafat}? 'Mati' : 'Hidup'"></td>
+        		</tr>        		
+        	</tfoot>
+       		</table>
+		</div>
+		
+	</body>
+</html>
