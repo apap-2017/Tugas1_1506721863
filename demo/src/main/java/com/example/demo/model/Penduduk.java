@@ -22,13 +22,5 @@ public class Penduduk
 	private String status_perkawinan;
 	private String status_dalam_keluarga;
 	private String golongan_darah;
-	private int is_wafat;
-	
-	private String alamat;
-	private String rt;
-	private String rw;
-	private String kelurahan;
-	private String kecamatan;
-	private String kota;
-	
+	private int is_wafat;	
 }

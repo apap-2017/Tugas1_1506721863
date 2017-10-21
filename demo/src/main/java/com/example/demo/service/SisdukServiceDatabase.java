@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.SisdukMapper;
+import com.example.demo.model.Kecamatan;
 import com.example.demo.model.Keluarga;
+import com.example.demo.model.Kelurahan;
+import com.example.demo.model.Kota;
 import com.example.demo.model.Penduduk;
 
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +64,21 @@ public class SisdukServiceDatabase implements SisdukService {
 	@Override
 	public void updateKematian(String nik) {
 		sisdukMapper.updateKematian(nik);
+	}
+	
+	@Override
+	public Kelurahan selectKelurahan(int id_kelurahan) {
+		return sisdukMapper.selectKelurahan(id_kelurahan);
+	}
+	
+	@Override
+	public Kecamatan selectKecamatan(int id_kecamatan) {
+		return sisdukMapper.selectKecamatan(id_kecamatan);
+	}
+
+	@Override
+	public Kota selectKota(int id_kota) {
+		return sisdukMapper.selectKota(id_kota);
 	}
 
 }

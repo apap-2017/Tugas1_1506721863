@@ -8,7 +8,10 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.example.demo.model.Kecamatan;
 import com.example.demo.model.Keluarga;
+import com.example.demo.model.Kelurahan;
+import com.example.demo.model.Kota;
 import com.example.demo.model.Penduduk;
 
 @Mapper
@@ -29,9 +32,6 @@ public interface SisdukMapper
 			@Result(property="status_dalam_keluarga", column="status_dalam_keluarga"),
 			@Result(property="golongan_darah", column="golongan_darah"),
 			@Result(property="is_wafat", column="is_wafat")
-			//@Result(property="keluarga", column="keluarga",
-	    		//	javaType = List.class,
-	    			//many=@Many(select="selectKeluarga(id_keluarga)"))
 	})
 	Penduduk selectPenduduk (@Param("nik") String nik);
 	
@@ -74,4 +74,13 @@ public interface SisdukMapper
 	
 	@Update("UPDATE penduduk SET is_wafat = #{is_wafat} FROM penduduk WHERE nik = #{nik}")
 	void updateKematian(@Param("nik") String nik);
+	
+	@Select("select nama_kelurahan from kelurahan where id_kelurahan = #{id_kelurahan}")
+	Kelurahan selectKelurahan(@Param("id_kelurahan") int id_kelurahan);
+	
+	@Select("select nama_kecamatan from kecamatan where id_kecamatan = #{id_kecamatan}")
+	Kecamatan selectKecamatan(@Param("id_kecamatan") int id_kecamatan);
+	
+	@Select("select nama_kota from kota where id_kota = #{id_kota}")
+	Kota selectKota(@Param("id_kota") int id_kota);
 }
