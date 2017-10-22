@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -7,6 +9,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Many;
 
 import com.example.demo.model.Kecamatan;
 import com.example.demo.model.Keluarga;
@@ -63,6 +66,24 @@ public interface SisdukMapper
 			@Result(property="is_tidak_berlaku", column="is_tidak_berlaku")
 	}) 
 	Keluarga selectKeluarga (@Param("id_keluarga") int id_keluarga);
+	
+	@Select("select id, nomor_kk, alamat, rt, rw, id_kelurahan, is_tidak_berlaku from keluarga where nomor_kk = #{nomor_kk}")
+	@Results(value = {
+			@Result(property="id", column="id"),
+			@Result(property="nomor_kk", column="nomor_kk"),
+			@Result(property="alamat", column="alamat"),
+			@Result(property="rt", column="rt"),
+			@Result(property="rw", column="rw"),
+			@Result(property="id_kelurahan", column="id_kelurahan"),
+			@Result(property="is_tidak_berlaku", column="is_tidak_berlaku"),
+			@Result(property="penduduk", column="id",
+					javaType = List.class,
+					many=@Many(select="selectPendudukKeluarga"))
+	}) 
+	Keluarga selectKeluargaKK (@Param("nomor_kk") String nomor_kk);
+	
+	@Select("select penduduk.nama, penduduk.nik, penduduk.jenis_kelamin, penduduk.tempat_lahir, penduduk.tanggal_lahir, penduduk.is_wni, penduduk.id_keluarga, penduduk.agama, penduduk.pekerjaan, penduduk.status_perkawinan, penduduk.status_dalam_keluarga from penduduk, keluarga where penduduk.id_keluarga = keluarga.id AND keluarga.id = #{id}")
+	List <Penduduk> selectPendudukKeluarga(@Param("id") int id);
 	
 	@Insert("INSERT INTO keluarga (alamat, rt, rw, id_kelurahan,) VALUES (#{alamat}, #{rt}, #{rw}, #{id_kelurahan})")
 	void addKeluarga (Keluarga keluarga);

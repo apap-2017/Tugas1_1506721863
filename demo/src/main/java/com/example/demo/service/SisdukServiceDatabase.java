@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +37,22 @@ public class SisdukServiceDatabase implements SisdukService {
 
 	@Override
 	public Keluarga selectKeluarga(int id_keluarga) {
-		log.info("select keluarga with nomor kk {}", id_keluarga);
+		log.info("select keluarga with id {}", id_keluarga);
 		return sisdukMapper.selectKeluarga(id_keluarga);
 	}
-
+	
+	@Override
+	public Keluarga selectKeluargaKK(String nomor_kk) {
+		log.info("select keluarga with nomoor kk {}", nomor_kk);
+		return sisdukMapper.selectKeluargaKK(nomor_kk);
+	}
+	
+	@Override
+	public List<Penduduk> selectPendudukKeluarga(int id) {
+		log.info("select penduduk with id {}", id);
+		return sisdukMapper.selectPendudukKeluarga(id);
+	}
+	
 	@Override
 	public void addPendudukKeluarga() {
 		// TODO Auto-generated method stub

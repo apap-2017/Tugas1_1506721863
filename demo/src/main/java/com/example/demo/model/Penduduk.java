@@ -14,6 +14,7 @@ public class Penduduk
 	private String nama;
 	private String tempat_lahir;
 	private String tanggal_lahir;
+	private String ttl;
 	private int jenis_kelamin;
 	private int is_wni;
 	private int id_keluarga;

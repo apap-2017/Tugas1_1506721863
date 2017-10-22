@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Halaman Utama Sisduk DKI</title>
+		<meta charset="ISO-8859-1"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#tabel-keluarga').DataTable();
+			} );
+		</script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">Sistem Informasi Kependudukan</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+      				<li><a href="/">Home</a></li>
+      				<li class="active"><a href="">Cari Data</a></li>
+      			</ul>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<h1 th:text="'Lihat Data Keluarga - ' + ${keluarga.nomor_kk}">Lihat Data Keluarga</h1>
+        	<br></br>
+        	<table id="tabel-meta-keluarga" class="display" cellspacing="0" width="80%">
+	        	<thead>
+	        		<tr>
+	        			<th></th>
+	        			<th></th>
+	        		</tr>
+	        	</thead>
+	        	<tfoot>
+	        		<tr>
+	        			<td><strong>NKK</strong></td>
+	        			<td th:text="${keluarga.nomor_kk}"></td>
+	        		</tr>
+	          		<tr>
+	        			<td><strong>Alamat</strong></td>
+	        			<td th:text="${keluarga.alamat}"></td>
+	        		</tr>
+	          		<tr>
+	        			<td><strong>RT/RW</strong></td>
+	        			<td th:text="${keluarga.rt} + '/' + ${keluarga.rw}"></td>
+	        		</tr>
+	          		<tr>
+	        			<td><strong>Kelurahan/Desa</strong></td>
+	        			<td th:text="${kelurahan.nama_kelurahan}"></td>
+	        		</tr>
+	          		<tr>
+	        			<td><strong>Kecamatan</strong></td>
+	        			<td th:text="${kecamatan.nama_kecamatan}"></td>
+	        		</tr>        		
+	          		<tr>
+	        			<td><strong>Kota</strong></td>
+	        			<td th:text="${kota.nama_kota}"></td>
+	        		</tr>
+	        	</tfoot>
+       		</table>
+       		<br></br>
+       		<hr/>
+       		<table id="tabel-keluarga" class="cell-border" cellspacing="10" width="100%">
+	        	<thead>
+	        		<tr>
+	        			<th><strong>No</strong></th>
+	        			<th><strong>Nama Lengkap</strong></th>
+	        			<th><strong>NIK</strong></th>
+	        			<th><strong>Jenis Kelamin</strong></th>
+	        			<th><strong>Tempat Lahir</strong></th>
+	        			<th><strong>Tanggal Lahir</strong></th>
+	        			<th><strong>Agama</strong></th>
+	        			<th><strong>Pekerjaan</strong></th>
+	        			<th><strong>Status Perkawinan</strong></th>
+	        			<th><strong>Status dalam Keluarga</strong></th>
+	        			<th><strong>Kewarganegaraan</strong></th>
+	        		</tr>
+	        	</thead>
+	        	<tfoot>
+	        		<tr th:each="penduduk,iterationStatus: ${keluarga.penduduk}">
+	        			<td th:text="${iterationStatus.count}"></td>
+	        			<td th:text="${penduduk.nama}"></td>
+	        			<td th:text="${penduduk.nik}"></td>
+	        			<td th:text="${penduduk.jenis_kelamin}==0? 'Laki-laki' : 'Perempuan'"></td>
+	        			<td th:text="${penduduk.tempat_lahir}"></td>
+	        			<td th:text="${penduduk.tanggal_lahir}"></td>
+	        			<td th:text="${penduduk.agama}"></td>
+	        			<td th:text="${penduduk.pekerjaan}"></td>
+	        			<td th:text="${penduduk.status_perkawinan}"></td>
+	        			<td th:text="${penduduk.status_dalam_keluarga}"></td>
+	        			<td th:text="${penduduk.is_wni}? 'WNA' : 'WNI'"></td>
+	        		</tr>
+	        	</tfoot>       		
+       		</table>
+		</div>
+		
+	</body>
+</html>

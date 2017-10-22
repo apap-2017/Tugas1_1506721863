@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import com.example.demo.model.Kecamatan;
 import com.example.demo.model.Keluarga;
 import com.example.demo.model.Kelurahan;
@@ -11,6 +13,8 @@ public interface SisdukService
 	Penduduk selectPenduduk(String nik);
 	Penduduk selectPendudukKota(String nik);
 	Keluarga selectKeluarga(int id_keluarga);
+	Keluarga selectKeluargaKK(String nomor_kk);
+	List <Penduduk> selectPendudukKeluarga(int id_keluarga);
 	void addPendudukKeluarga();
 	void addKeluarga(Keluarga keluarga);
 	void updatePenduduk(String nik);

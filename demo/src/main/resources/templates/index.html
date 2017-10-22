@@ -14,7 +14,7 @@
       				<a class="navbar-brand" href="#">Sistem Informasi Kependudukan</a>
     			</div>
     			<ul class="nav navbar-nav">
-      				<li class="active"><a href="#">Home</a></li>
+      				<li class="active"><a href="/">Home</a></li>
       				<li><a href="#">Cari Data</a></li>
       			</ul>
 			</div>
@@ -33,13 +33,13 @@
 				<button type="submit" class="btn btn-info">Lihat</button>
 				<hr/><br></br>
 			</form>
-			<form>
-				<h4>Lihat Data Penduduk Berdasarkan NIK</h4>
+			<form method="GET" action="/keluarga">
+				<h4>Lihat Data Keluarga Berdasarkan NKK</h4>
 				<div class="form-group">
 					<label for="nomor_kk">Masukkan Nomor Kartu Keluarga</label>
-					<input type="text" class="form-control" id="nomor_kk" style="width: 300px;"></input>
+					<input type="text" class="form-control" id="nomor_kk" name="nomor_kk" style="width: 300px;"></input>
 				</div>
-				<a><button class="btn btn-info">Lihat</button></a>
+				<button type="submit" class="btn btn-info">Lihat</button>
 			</form>		
 		</div>
 	</body>
