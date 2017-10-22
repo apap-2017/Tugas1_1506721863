@@ -56,7 +56,7 @@ public class SisdukServiceDatabase implements SisdukService {
 	@Override
 	public void addPendudukKeluarga(Penduduk penduduk) {
 		log.info("tambah");
-		sisdukMapper.addPendudukKeluarga();
+		sisdukMapper.addPendudukKeluarga(penduduk);
 	}
 
 	@Override
@@ -93,6 +93,11 @@ public class SisdukServiceDatabase implements SisdukService {
 	@Override
 	public Kota selectKota(int id_kota) {
 		return sisdukMapper.selectKota(id_kota);
+	}
+	
+	@Override
+	public Penduduk selectPendudukLike(String nik) {
+		return sisdukMapper.selectPendudukLike(nik);
 	}
 
 }

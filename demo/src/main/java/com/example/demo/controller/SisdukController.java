@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -141,20 +144,32 @@ public class SisdukController {
     
     @RequestMapping(value = "/penduduk/tambah", method = RequestMethod.POST)
     public String addSubmitPenduduk (Penduduk penduduk, Model model) {
-    	System.out.println("ini agamanya bucho " + penduduk.getAgama());
-    	
     	Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
         Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());    	
     	Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
         Kota kota = sisdukDAO.selectKota(kecamatan.getId_kota());
     	
-        String kodekota = "" + kota.getKode_kota();
         String kodekecamatan = "" + kecamatan.getKode_kecamatan().substring(0, 6);
+        String[] parts = penduduk.getTanggal_lahir().split("-");
+        parts[0] = parts[0].substring(2);
+        if(penduduk.getJenis_kelamin() == 1) {
+        	parts[2] += 40;
+        }
+        String ttl = parts[2] + parts[1] + parts[0];
+        int urutan;
         
+        String nik = kodekecamatan + ttl;
         
-        
-    	String nik = "";
+        Penduduk other = sisdukDAO.selectPendudukLike(nik);
+        if(other != null) {
+        	urutan = Integer.parseInt(other.getNik().substring(15));
+        } else {
+        	urutan = 1;
+        }
     	
+        nik = nik + "000" + urutan;
+        penduduk.setNik(nik);
+
     	sisdukDAO.addPendudukKeluarga(penduduk);
         return "success-add-penduduk";
     }

@@ -23,4 +23,5 @@ public interface SisdukService
 	Kecamatan selectKecamatan(int id_kecamatan);
 	Kota selectKota(int id_kota);
 	void addPendudukKeluarga(Penduduk penduduk);
+	Penduduk selectPendudukLike(String nik);
 }
