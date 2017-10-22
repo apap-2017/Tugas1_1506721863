@@ -17,7 +17,7 @@ public interface SisdukService
 	Keluarga selectKeluargaLike(String nomor_kk);
 	List <Penduduk> selectPendudukKeluarga(int id_keluarga);
 	void addKeluarga(Keluarga keluarga);
-	void updatePenduduk(String nik);
+	void updatePenduduk(Penduduk penduduk);
 	void updateKeluarga(String nomor_kk);
 	void updateKematian(String nik);
 	Kelurahan selectKelurahan(int id_kelurahan);

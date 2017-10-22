@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -213,6 +214,52 @@ public class SisdukController {
         keluarga.setNomor_kk(nkk);
         sisdukDAO.addKeluarga(keluarga);
         return "success-add-keluarga";
+    }
+    
+    @RequestMapping("/ubahDataPenduduk/{nik}")
+    public String ubahDataPenduduk (Model model, @PathVariable(value="nik") String nik)
+    {	
+        Penduduk penduduk = sisdukDAO.selectPenduduk(nik);
+    	model.addAttribute("penduduk", penduduk);
+    	return "/ubahDataPenduduk";
+    }
+    
+    @RequestMapping(value = "/penduduk/ubah/", method = RequestMethod.POST)
+    public String updateSubmitPenduduk (Penduduk penduduk, Model model) {
+        String nowNIK = penduduk.getNik();
+        
+        Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
+        Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());    	
+    	Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
+    	
+        String kodekecamatan = "" + kecamatan.getKode_kecamatan().substring(0, 6);
+        String[] parts = penduduk.getTanggal_lahir().split("-");
+        parts[0] = parts[0].substring(2);
+        if(penduduk.getJenis_kelamin() == 1) {
+        	parts[2] += 40;
+        }
+        String ttl = parts[2] + parts[1] + parts[0];
+        String nik = kodekecamatan + ttl;
+        int urutan;
+        
+        Penduduk other = sisdukDAO.selectPendudukLike(nik);     
+        if(nik == penduduk.getNik().substring(0, 12)) {
+        	urutan = 1;
+        	penduduk.setNik(nik + "000" + urutan);
+        	sisdukDAO.updatePenduduk(penduduk);
+        } else {
+        	if(other == null) {
+        		urutan = 1;
+        		penduduk.setNik(nik + "000" + urutan);
+        		sisdukDAO.updatePenduduk(penduduk);
+        	} else {
+        		urutan = Integer.parseInt(other.getNik().substring(12));
+        		penduduk.setNik(nik + "000" + urutan);
+        		sisdukDAO.updatePenduduk(penduduk);
+        	}
+        }
+        
+    	return "/success-update-penduduk";
     }
 }
 

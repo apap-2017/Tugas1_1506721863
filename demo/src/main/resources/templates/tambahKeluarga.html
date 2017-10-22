@@ -32,7 +32,7 @@
 					<label for="rw">RW</label>
 					<input type="text" class="form-control" id="rw" name="rw" th:field="*{rw}" th:value="${keluarga.rw}" style="width: 300px;"></input>
 					<label for="kelurahan">Kelurahan/Desa</label>
-					<select class="form-control" id="id_kelurahan" name="id_kelurahan" style="width: 300px;">
+					<select class="form-control" id="id_kelurahan" name="id_kelurahan"  style="width: 300px;">
 						<option th:each="kelurahan,iterationStatus : ${kelurahans}" th:value="${kelurahan.id}" th:text="${kelurahan.nama_kelurahan}"></option>
 					</select>
 					<label for="kecamatan">Kecamatan</label>

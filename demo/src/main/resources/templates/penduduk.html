@@ -22,7 +22,7 @@
 			</div>
 		</nav>
 		
-		<div class="container">
+				<div class="container">
 			<h1 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}">Lihat Data Penduduk</h1>
         	<br></br>
         	<table id="tabel-penduduk" class="display" cellspacing="0" width="80%">
@@ -91,6 +91,8 @@
         		</tr>        		
         	</tfoot>
        		</table>
+    		<br></br><br></br>   		
+			<a th:href="'ubahDataPenduduk/' + ${penduduk.nik}"><button type="button" class="btn btn-info">Ubah Data</button></a>
 		</div>
 		
 	</body>

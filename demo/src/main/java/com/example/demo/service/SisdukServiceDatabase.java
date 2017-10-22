@@ -65,15 +65,9 @@ public class SisdukServiceDatabase implements SisdukService {
 	}
 
 	@Override
-	public void updatePenduduk(String nik) {
-		sisdukMapper.updatePenduduk(nik);
-	}
-
-	@Override
 	public void updateKeluarga(String nomor_kk) {
 		sisdukMapper.updateKeluarga(nomor_kk);
 	}
-
 
 	@Override
 	public void updateKematian(String nik) {
@@ -109,5 +103,10 @@ public class SisdukServiceDatabase implements SisdukService {
 	public Keluarga selectKeluargaLike(String nomor_kk) {
 		log.info("select keluarga with nomoor kk {}", nomor_kk);
 		return sisdukMapper.selectKeluargaLike(nomor_kk);
+	}
+
+	@Override
+	public void updatePenduduk(Penduduk penduduk) {
+		sisdukMapper.updatePenduduk(penduduk);
 	}
 }

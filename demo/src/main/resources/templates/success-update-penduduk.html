@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title>Halaman Tambah dan UbahSisduk DKI</title>
+		<title>Sukses</title>
 		<meta charset="ISO-8859-1"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
 	</head>
 	<body>	
 		<nav class="navbar navbar-inverse">
@@ -18,25 +16,14 @@
     			<ul class="nav navbar-nav">
       				<li><a href="/">Home</a></li>
       				<li><a href="/">Cari Data</a></li>
-      				<li class="active"><a href="tambahUbah">Tambah dan Ubah Penduduk</a></li>
+      				<li><a href="/tambahUbah">Tambah dan Ubah Penduduk</a></li>
       			</ul>
 			</div>
 		</nav>
 		
 		<div class="container">
-			<h3>Menambah Data</h3>
-			<h5>Silakan menambahkan data yang diinginkan.</h5>
-			<hr/>
-			
-			<h5>Menambahkan Penduduk Baru</h5>
-			<a href="tambahPenduduk"><button type="button" class="btn btn-info">Tambahkan</button></a>
-			<br></br>
-			
-			<h5>Menambahkan Keluarga Baru</h5>
-			<a href="tambahKeluarga"><button type="button" class="btn btn-info">Tambahkan</button></a>
+			<h1>Sukses!</h1>
+			<h3 th:text="'Data penduduk dengan NIK ' + ${penduduk.nik} + ' berhasil diperbarui.'"></h3>		
 		</div>
-
-		<br></br> <br></br>
-
 	</body>
 </html>
