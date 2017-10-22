@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Kecamatan;
@@ -121,6 +123,40 @@ public class SisdukController {
             model.addAttribute ("nomor_kk", nomor_kk);
             return "/error/404";
         }
+    }
+    
+    @RequestMapping("/tambahUbah")
+    public String tambahUbah ()
+    {
+        return "tambahUbah";
+    } 
+
+    @RequestMapping("/tambahPenduduk")
+    public String tambahPenduduk (Model model)
+    {
+    	Penduduk penduduk = new Penduduk();
+    	model.addAttribute("penduduk", penduduk);
+        return "tambahPenduduk";
+    }
+    
+    @RequestMapping(value = "/penduduk/tambah", method = RequestMethod.POST)
+    public String addSubmitPenduduk (Penduduk penduduk, Model model) {
+    	System.out.println("ini agamanya bucho " + penduduk.getAgama());
+    	
+    	Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
+        Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());    	
+    	Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
+        Kota kota = sisdukDAO.selectKota(kecamatan.getId_kota());
+    	
+        String kodekota = "" + kota.getKode_kota();
+        String kodekecamatan = "" + kecamatan.getKode_kecamatan().substring(0, 6);
+        
+        
+        
+    	String nik = "";
+    	
+    	sisdukDAO.addPendudukKeluarga(penduduk);
+        return "success-add-penduduk";
     }
 }
 

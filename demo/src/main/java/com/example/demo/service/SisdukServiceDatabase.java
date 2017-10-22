@@ -54,9 +54,9 @@ public class SisdukServiceDatabase implements SisdukService {
 	}
 	
 	@Override
-	public void addPendudukKeluarga() {
-		// TODO Auto-generated method stub
-		
+	public void addPendudukKeluarga(Penduduk penduduk) {
+		log.info("tambah");
+		sisdukMapper.addPendudukKeluarga();
 	}
 
 	@Override

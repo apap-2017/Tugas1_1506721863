@@ -88,6 +88,9 @@ public interface SisdukMapper
 	@Insert("INSERT INTO keluarga (alamat, rt, rw, id_kelurahan,) VALUES (#{alamat}, #{rt}, #{rw}, #{id_kelurahan})")
 	void addKeluarga (Keluarga keluarga);
 	
+	@Insert("INSERT INTO penduduk (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, is_wni, id_keluarga, agama, pekerjaan, status_perkawinan, status_dalam_keluarga, golongan_darah) VALUES (#{nik}, #{nama}, #{tempat_lahir}, #{tanggal_lahir}, #{jenis_kelamin}, #{is_wni}, #{id_keluarga}, #{agama}, #{pekerjaan}, #{status_perkawinan}, #{status_dalam_keluarga}, #{golongan_darah})")
+	void addPendudukKeluarga();
+	
 	@Update("UPDATE penduduk SET nama = #{nama}, tempat_lahir = #{tempat_lahir}, jenis_kelamin = #{jenis_kelamin}, is_wni = #{is_wni}, id_keluarga = #{id_keluarga}, agama = #{agama}, pekerjaan = #{pekerjaan}, status_perkawinan = #{status_perkawinan}, status_dalam_keluarga = #{status_dalam_keluarga}, golongan_darah = #{golongan_darah} FROM penduduk WHERE nik = #{nik}")
 	void updatePenduduk(@Param("nik") String nik);
 	
@@ -100,9 +103,9 @@ public interface SisdukMapper
 	@Select("select nama_kelurahan, id_kecamatan from kelurahan where id = #{id_kelurahan}")
 	Kelurahan selectKelurahan(@Param("id_kelurahan") int id_kelurahan);
 	
-	@Select("select nama_kecamatan, id_kota from kecamatan where id = #{id_kecamatan}")
+	@Select("select nama_kecamatan, kode_kecamatan, id_kota from kecamatan where id = #{id_kecamatan}")
 	Kecamatan selectKecamatan(@Param("id_kecamatan") int id_kecamatan);
 	
-	@Select("select nama_kota from kota where id = #{id_kota}")
+	@Select("select nama_kota, kode_kota from kota where id = #{id_kota}")
 	Kota selectKota(@Param("id_kota") int id_kota);
 }
