@@ -14,6 +14,7 @@ public interface SisdukService
 	Penduduk selectPendudukKota(String nik);
 	Keluarga selectKeluarga(int id_keluarga);
 	Keluarga selectKeluargaKK(String nomor_kk);
+	Keluarga selectKeluargaLike(String nomor_kk);
 	List <Penduduk> selectPendudukKeluarga(int id_keluarga);
 	void addKeluarga(Keluarga keluarga);
 	void updatePenduduk(String nik);
@@ -21,6 +22,7 @@ public interface SisdukService
 	void updateKematian(String nik);
 	Kelurahan selectKelurahan(int id_kelurahan);
 	Kecamatan selectKecamatan(int id_kecamatan);
+	List <Kelurahan> selectAllKelurahan();
 	Kota selectKota(int id_kota);
 	void addPendudukKeluarga(Penduduk penduduk);
 	Penduduk selectPendudukLike(String nik);

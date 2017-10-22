@@ -18,4 +18,5 @@ public class Keluarga {
 	private int id_kelurahan;
 	private int is_tidak_berlaku;
 	private List<Penduduk> penduduk;
+	private List<Kelurahan> kelurahan;
 }

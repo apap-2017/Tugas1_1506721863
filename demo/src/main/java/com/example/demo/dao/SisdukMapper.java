@@ -85,7 +85,7 @@ public interface SisdukMapper
 	@Select("select penduduk.nama, penduduk.nik, penduduk.jenis_kelamin, penduduk.tempat_lahir, penduduk.tanggal_lahir, penduduk.is_wni, penduduk.id_keluarga, penduduk.agama, penduduk.pekerjaan, penduduk.status_perkawinan, penduduk.status_dalam_keluarga from penduduk, keluarga where penduduk.id_keluarga = keluarga.id AND keluarga.id = #{id}")
 	List <Penduduk> selectPendudukKeluarga(@Param("id") int id);
 	
-	@Insert("INSERT INTO keluarga (alamat, rt, rw, id_kelurahan,) VALUES (#{alamat}, #{rt}, #{rw}, #{id_kelurahan})")
+	@Insert("INSERT INTO keluarga (nomor_kk, alamat, rt, rw, id_kelurahan, is_tidak_berlaku) VALUES (#{nomor_kk}, #{alamat}, #{rt}, #{rw}, #{id_kelurahan}, #{is_tidak_berlaku})")
 	void addKeluarga (Keluarga keluarga);
 	
 	@Insert("INSERT INTO penduduk (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, is_wni, id_keluarga, agama, pekerjaan, status_perkawinan, status_dalam_keluarga, golongan_darah) VALUES (#{nik}, #{nama}, #{tempat_lahir}, #{tanggal_lahir}, #{jenis_kelamin}, #{is_wni}, #{id_keluarga}, #{agama}, #{pekerjaan}, #{status_perkawinan}, #{status_dalam_keluarga}, #{golongan_darah})")
@@ -105,6 +105,9 @@ public interface SisdukMapper
 	
 	@Select("select nama_kecamatan, kode_kecamatan, id_kota from kecamatan where id = #{id_kecamatan}")
 	Kecamatan selectKecamatan(@Param("id_kecamatan") int id_kecamatan);
+	
+	@Select("select nama_kelurahan, id from kelurahan")
+	List <Kelurahan> selectAllKelurahan();
 	
 	@Select("select nama_kota, kode_kota from kota where id = #{id_kota}")
 	Kota selectKota(@Param("id_kota") int id_kota);
@@ -126,4 +129,19 @@ public interface SisdukMapper
 			@Result(property="is_wafat", column="is_wafat")
 	})
 	Penduduk selectPendudukLike (@Param("nik") String nik);
+
+	@Select("select id, nomor_kk, alamat, rt, rw, id_kelurahan, is_tidak_berlaku from keluarga where nomor_kk like #{nomor_kk}")
+	@Results(value = {
+			@Result(property="id", column="id"),
+			@Result(property="nomor_kk", column="nomor_kk"),
+			@Result(property="alamat", column="alamat"),
+			@Result(property="rt", column="rt"),
+			@Result(property="rw", column="rw"),
+			@Result(property="id_kelurahan", column="id_kelurahan"),
+			@Result(property="is_tidak_berlaku", column="is_tidak_berlaku"),
+			@Result(property="penduduk", column="id",
+					javaType = List.class,
+					many=@Many(select="selectPendudukKeluarga"))
+	}) 
+	Keluarga selectKeluargaLike (@Param("nomor_kk") String nomor_kk);
 }

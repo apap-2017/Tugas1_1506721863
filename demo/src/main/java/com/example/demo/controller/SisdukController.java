@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,7 +148,6 @@ public class SisdukController {
     	Keluarga keluarga = sisdukDAO.selectKeluarga(penduduk.getId_keluarga());
         Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());    	
     	Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
-        Kota kota = sisdukDAO.selectKota(kecamatan.getId_kota());
     	
         String kodekecamatan = "" + kecamatan.getKode_kecamatan().substring(0, 6);
         String[] parts = penduduk.getTanggal_lahir().split("-");
@@ -162,7 +162,7 @@ public class SisdukController {
         
         Penduduk other = sisdukDAO.selectPendudukLike(nik);
         if(other != null) {
-        	urutan = Integer.parseInt(other.getNik().substring(15));
+        	urutan = Integer.parseInt(other.getNik().substring(15)) + 1;
         } else {
         	urutan = 1;
         }
@@ -172,6 +172,47 @@ public class SisdukController {
 
     	sisdukDAO.addPendudukKeluarga(penduduk);
         return "success-add-penduduk";
+    }
+    
+    @RequestMapping("/tambahKeluarga")
+    public String tambahKeluarga (Model model)
+    {
+    	Keluarga keluarga = new Keluarga();
+    	List<Kelurahan> kelurahans = sisdukDAO.selectAllKelurahan();
+    	model.addAttribute("kelurahans", kelurahans);
+    	model.addAttribute("keluarga", keluarga);
+        return "tambahKeluarga";
+    }
+    
+    @RequestMapping(value = "/keluarga/tambah", method = RequestMethod.POST)
+    public String addSubmitKeluarga (Keluarga keluarga, Model model) {
+        Kelurahan kelurahan = sisdukDAO.selectKelurahan(keluarga.getId_kelurahan());    	
+    	Kecamatan kecamatan = sisdukDAO.selectKecamatan(kelurahan.getId_kecamatan());
+    	
+        String kodekecamatan = "" + kecamatan.getKode_kecamatan().substring(0, 6);
+        
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now();
+        String tanggalterbitnkk = dateFormat.format(date);
+        
+        String[] parts = tanggalterbitnkk.split("-");
+        parts[0] = parts[0].substring(2);
+        tanggalterbitnkk = parts[2] + parts[1] + parts[0];
+        
+        int urutan;
+        
+        String nkk = kodekecamatan + tanggalterbitnkk;
+        Keluarga other = sisdukDAO.selectKeluargaLike(nkk);
+        if(other != null) {
+        	urutan = Integer.parseInt(other.getNomor_kk().substring(15)) + 1;
+        } else {
+        	urutan = 1;
+        }
+        
+        nkk = nkk +"000"+ urutan;
+        keluarga.setNomor_kk(nkk);
+        sisdukDAO.addKeluarga(keluarga);
+        return "success-add-keluarga";
     }
 }
 

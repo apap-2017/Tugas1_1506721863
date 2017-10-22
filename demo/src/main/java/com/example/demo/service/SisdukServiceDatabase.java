@@ -99,5 +99,15 @@ public class SisdukServiceDatabase implements SisdukService {
 	public Penduduk selectPendudukLike(String nik) {
 		return sisdukMapper.selectPendudukLike(nik);
 	}
-
+	
+	@Override
+	public List<Kelurahan> selectAllKelurahan() {
+		return sisdukMapper.selectAllKelurahan();
+	}
+	
+	@Override
+	public Keluarga selectKeluargaLike(String nomor_kk) {
+		log.info("select keluarga with nomoor kk {}", nomor_kk);
+		return sisdukMapper.selectKeluargaLike(nomor_kk);
+	}
 }

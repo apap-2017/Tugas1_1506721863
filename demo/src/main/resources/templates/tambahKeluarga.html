@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Tambah Keluarga</title>
+		<meta charset="ISO-8859-1"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	</head>
+	<body>	
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="#">Sistem Informasi Kependudukan</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+      				<li class="active"><a href="/">Home</a></li>
+      				<li><a href="/">Cari Data</a></li>
+      				<li><a href="/tambahUbah">Tambah dan Ubah Penduduk</a></li>
+      			</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<form th:object="${keluarga}" method="post" action="/keluarga/tambah">
+				<h4>Menambahkan Keluarga</h4>
+				<hr/>
+					<div class="form-group">
+					<label for="nama">Alamat</label>
+					<input type="text" class="form-control" id="alamat" name="alamat" th:field="*{alamat}" th:value="${keluarga.alamat}" style="width: 300px;"></input>
+					<label for="rt">RT</label>
+					<input type="text" class="form-control" id="rt" name="rt" th:field="*{rt}" th:value="${keluarga.rt}" style="width: 300px;"></input>
+					<label for="rw">RW</label>
+					<input type="text" class="form-control" id="rw" name="rw" th:field="*{rw}" th:value="${keluarga.rw}" style="width: 300px;"></input>
+					<label for="kelurahan">Kelurahan/Desa</label>
+					<select class="form-control" id="id_kelurahan" name="id_kelurahan" style="width: 300px;">
+						<option th:each="kelurahan,iterationStatus : ${kelurahans}" th:value="${kelurahan.id}" th:text="${kelurahan.nama_kelurahan}"></option>
+					</select>
+					<label for="kecamatan">Kecamatan</label>
+					<input type="text" class="form-control" id="kecamatan" name="kecamatan" style="width: 300px;"></input>
+					<label for="kota">Kota</label>
+					<input type="text" class="form-control" id="kota" name="kota" style="width: 300px;"></input>
+				</div>
+				<button type="submit" class="btn btn-info">Tambahkan</button>
+				<hr/><br></br>
+			</form>
+		</div>		
+	</body>
+</html>
